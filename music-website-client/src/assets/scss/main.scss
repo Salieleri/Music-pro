@@ -1,0 +1,23 @@
+#app {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+dl, dt, dd, ol, ul, li,hr,img,a,
+form, label, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header {
+  padding: 0;
+  margin: 0;
+}
+
+html{
+  background-color: #e6ecf0;
+}
