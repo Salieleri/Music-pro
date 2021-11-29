@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.salieri.dao.SongMapper" >
+  <resultMap id="BaseResultMap" type="com.example.salieri.entity.Song" >
+    <id column="Song_ID" property="songId" jdbcType="VARCHAR" />
+    <result column="Song_Name" property="songName" jdbcType="VARCHAR" />
+    <result column="Song_Pos" property="songPos" jdbcType="VARCHAR" />
+    <result column="Song_Praise" property="songPraise" jdbcType="INTEGER" />
+    <result column="Song_count" property="songCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Song_ID, Song_Name, Song_Pos, Song_Praise, Song_count
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from song_info
+    where Song_ID = #{songId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from song_info
+    where Song_ID = #{songId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.salieri.entity.Song" >
+    insert into song_info (Song_ID, Song_Name, Song_Pos, 
+      Song_Praise, Song_count)
+    values (#{songId,jdbcType=VARCHAR}, #{songName,jdbcType=VARCHAR}, #{songPos,jdbcType=VARCHAR}, 
+      #{songPraise,jdbcType=INTEGER}, #{songCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.salieri.entity.Song" >
+    insert into song_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="songId != null" >
+        Song_ID,
+      </if>
+      <if test="songName != null" >
+        Song_Name,
+      </if>
+      <if test="songPos != null" >
+        Song_Pos,
+      </if>
+      <if test="songPraise != null" >
+        Song_Praise,
+      </if>
+      <if test="songCount != null" >
+        Song_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="songId != null" >
+        #{songId,jdbcType=VARCHAR},
+      </if>
+      <if test="songName != null" >
+        #{songName,jdbcType=VARCHAR},
+      </if>
+      <if test="songPos != null" >
+        #{songPos,jdbcType=VARCHAR},
+      </if>
+      <if test="songPraise != null" >
+        #{songPraise,jdbcType=INTEGER},
+      </if>
+      <if test="songCount != null" >
+        #{songCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.salieri.entity.Song" >
+    update song_info
+    <set >
+      <if test="songName != null" >
+        Song_Name = #{songName,jdbcType=VARCHAR},
+      </if>
+      <if test="songPos != null" >
+        Song_Pos = #{songPos,jdbcType=VARCHAR},
+      </if>
+      <if test="songPraise != null" >
+        Song_Praise = #{songPraise,jdbcType=INTEGER},
+      </if>
+      <if test="songCount != null" >
+        Song_count = #{songCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Song_ID = #{songId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.salieri.entity.Song" >
+    update song_info
+    set Song_Name = #{songName,jdbcType=VARCHAR},
+      Song_Pos = #{songPos,jdbcType=VARCHAR},
+      Song_Praise = #{songPraise,jdbcType=INTEGER},
+      Song_count = #{songCount,jdbcType=INTEGER}
+    where Song_ID = #{songId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,14 @@
+server:
+  port: 4372
+
+spring:
+  datasource:
+    username: root
+    password: 141315
+    url: jdbc:mysql://localhost:3306/music_website?serverTimezone=GMT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    static-path-pattern: /**
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.salieri.entity
