@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.salieri.dao.SongListMapper" >
+  <resultMap id="BaseResultMap" type="com.example.salieri.entity.SongList" >
+    <id column="songlist_id" property="songlistId" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="style" property="style" jdbcType="CHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="SongResultMap" type="com.example.salieri.entity.Song" >
+    <id column="Song_ID" property="songId" jdbcType="VARCHAR" />
+    <result column="Song_Name" property="songName" jdbcType="VARCHAR" />
+    <result column="Song_Pos" property="songPos" jdbcType="VARCHAR" />
+    <result column="Song_Praise" property="songPraise" jdbcType="INTEGER" />
+    <result column="Song_count" property="songCount" jdbcType="INTEGER" />
+    <result column="Song_Singer" property="songSinger" jdbcType="VARCHAR" />
+    <result column="Song_Pic" property="songPic" jdbcType="VARCHAR" />
+    <result column="Song_intro" property="songIntro" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    songlist_id, title, pic, intro, style, user_id
+  </sql>
+  <sql id="Song_List">
+    Song_ID, Song_Name, Song_Pos, Song_Praise, Song_count, Song_Singer, Song_Pic, Song_intro
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from songlist_intro
+    where songlist_id = #{songlistId,jdbcType=VARCHAR}
+  </select>
+  <select id="getSongList" parameterType="int" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from songlist_intro
+    limit #{page},#{maxdata}
+  </select>
+  <select id="getsonglistofstyle" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from songlist_intro
+    where style = #{style}
+    limit #{page},#{maxdata}
+  </select>
+  <select id="getnum" resultType="int">
+    select count(*) from songlist_intro
+  </select>
+  <select id="getnumofstyle" parameterType="String" resultType="int">
+    select count(*) from songlist_intro where style = #{style}
+  </select>
+  <select id="getsongid" parameterType="String" resultType="String">
+    select song_id
+    from songlist_info
+    where songlist_id = #{id}
+  </select>
+  <select id="getsonginsonglist" resultMap="SongResultMap">
+    select
+    <include refid="Song_List"/>
+    from
+    song_info
+    where song_id in
+    <foreach collection="songid" item="param" index="index" open="(" close=")" separator=",">
+      #{param}
+    </foreach>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from songlist_intro
+    where songlist_id = #{songlistId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.salieri.entity.SongList" >
+    insert into songlist_intro (songlist_id, title, pic,
+      intro, style, user_id)
+    values (#{songlistId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR},
+      #{intro,jdbcType=VARCHAR}, #{style,jdbcType=CHAR}, #{userId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.salieri.entity.SongList" >
+    insert into songlist_intro
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="songlistId != null" >
+        songlist_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="style != null" >
+        style,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="songlistId != null" >
+        #{songlistId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null" >
+        #{style,jdbcType=CHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.salieri.entity.SongList" >
+    update songlist_intro
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null" >
+        style = #{style,jdbcType=CHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where songlist_id = #{songlistId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.salieri.entity.SongList" >
+    update songlist_intro
+    set title = #{title,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      style = #{style,jdbcType=CHAR},
+      user_id = #{userId,jdbcType=VARCHAR}
+    where songlist_id = #{songlistId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,6 +1,8 @@
 package com.example.salieri.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String userId;
 
     private String userPassword;

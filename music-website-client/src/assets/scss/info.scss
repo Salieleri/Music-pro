@@ -1,0 +1,41 @@
+.info {
+  padding-bottom: 30px;
+}
+.title {
+  height:50px;
+  line-height: 50px;
+  padding-left: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+}
+hr {
+  width: 98%;
+}
+.person {
+  padding-right: 50px;
+  padding-top:40px;
+}
+.btn{
+  width: 100%;
+  height: 40px;
+  margin-left: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  cursor: pointer;
+}
+.btn-child{
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #30a4fc;
+  margin: 0 20px;
+  color: #FFFFFF;
+}
+
+

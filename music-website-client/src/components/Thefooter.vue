@@ -1,15 +1,9 @@
 <template>
-  <el-row>
-    <el-col :span="2"><div class="grid-content"></div></el-col>
-    <el-col :span="20">
-      <el-footer>
-        <p v-for="(item,index) in footerindex" :key="index">
-          {{item}}
-        </p>
-      </el-footer>
-    </el-col>
-    <el-col :span="2"><div class="grid-content"></div></el-col>
-  </el-row>
+<div class="thefooter">
+  <p v-for="(item,index) in footerindex" :key="index">
+    {{item}}
+  </p>
+</div>
 </template>
 
 <script>

@@ -63,26 +63,35 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.salieri.entity.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.salieri.entity.model.UserUpdateModel" >
     update user_info
-    <set >
+    <set>
       <if test="userPassword != null" >
         User_Password = #{userPassword,jdbcType=VARCHAR},
       </if>
-      <if test="userAvator != null" >
-        User_Avator = #{userAvator,jdbcType=VARCHAR},
+      <if test="userId != null">
+        User_ID = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userPhonenumber != null" >
-        User_Phonenumber = #{userPhonenumber,jdbcType=VARCHAR},
+        User_Phonenumber = #{userPhonenumber,jdbcType=VARCHAR}
       </if>
     </set>
-    where User_ID = #{userId,jdbcType=VARCHAR}
+    where User_ID = #{userIdBefore,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.salieri.entity.User" >
     update user_info
     set User_Password = #{userPassword,jdbcType=VARCHAR},
       User_Avator = #{userAvator,jdbcType=VARCHAR},
       User_Phonenumber = #{userPhonenumber,jdbcType=VARCHAR}
+    where User_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateAvator" parameterType="com.example.salieri.entity.model.AvatorUploadModel">
+    update user_info
+    <set>
+      <if test="userAvator != null">
+        User_Avator = #{userAvator,jdbcType=VARCHAR}
+      </if>
+    </set>
     where User_ID = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>

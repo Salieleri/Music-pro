@@ -2,6 +2,13 @@
   min-height: 500px;
   padding: 0 20px;
 }
+.section-content{
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
 
 .content-item {
   width: 18%;
@@ -36,13 +43,16 @@
   background-color: rgba(52, 47, 41, 0.4);
   transition: all 0.3s ease-in-out;
   opacity: 0;
-  @include layout(center);
-  > .icon {
-    position: absolute;
-    top: 40%;
-  }
-  &:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  spacity: 1;
+  cursor: pointer;
+}
+.item-img {
+  width: 250px;
+  height: 240px;
+  transition: all 0.4s ease;
 }

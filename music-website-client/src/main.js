@@ -8,6 +8,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 import Vuex from 'vuex'
 import 'es6-promise/auto'
 import store from '@/store/index'
+import '@/assets/js/iconfont'
+import '@/assets/js/iconfont1'
+import '@/assets/js/iconfont2'
+import '@/assets/js/iconfont3'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)

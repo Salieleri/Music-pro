@@ -1,6 +1,8 @@
 package com.example.salieri.entity;
 
-public class Song {
+import java.io.Serializable;
+
+public class Song implements Serializable {
     private String songId;
 
     private String songName;
@@ -10,6 +12,12 @@ public class Song {
     private Integer songPraise;
 
     private Integer songCount;
+
+    private String songSinger;
+
+    private String songPic;
+
+    private String songIntro;
 
     public String getSongId() {
         return songId;
@@ -49,5 +57,29 @@ public class Song {
 
     public void setSongCount(Integer songCount) {
         this.songCount = songCount;
+    }
+
+    public String getSongSinger() {
+        return songSinger;
+    }
+
+    public void setSongSinger(String songSinger) {
+        this.songSinger = songSinger == null ? null : songSinger.trim();
+    }
+
+    public String getSongPic() {
+        return songPic;
+    }
+
+    public void setSongPic(String songPic) {
+        this.songPic = songPic == null ? null : songPic.trim();
+    }
+
+    public String getSongIntro() {
+        return songIntro;
+    }
+
+    public void setSongIntro(String songIntro) {
+        this.songIntro = songIntro == null ? null : songIntro.trim();
     }
 }

@@ -7,25 +7,50 @@
     <result column="Song_Pos" property="songPos" jdbcType="VARCHAR" />
     <result column="Song_Praise" property="songPraise" jdbcType="INTEGER" />
     <result column="Song_count" property="songCount" jdbcType="INTEGER" />
+    <result column="Song_Singer" property="songSinger" jdbcType="VARCHAR" />
+    <result column="Song_Pic" property="songPic" jdbcType="VARCHAR" />
+    <result column="Song_intro" property="songIntro" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    Song_ID, Song_Name, Song_Pos, Song_Praise, Song_count
+    Song_ID, Song_Name, Song_Pos, Song_Praise, Song_count, Song_Singer, Song_Pic, Song_intro
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from song_info
     where Song_ID = #{songId,jdbcType=VARCHAR}
+  </select>
+  <select id="getsongByid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from song_info
+    where song_ID in
+    <foreach collection="collectid" item="param" open="(" close=")" separator="," index="index">
+      #{param}
+    </foreach>
+  </select>
+  <select id="getsongBysongName" resultMap="BaseResultMap" parameterType="String">
+    select
+    <include refid="Base_Column_List"/>
+    from Song_info
+    where LOCATE(#{name,jdbcType=VARCHAR},Song_Name)
+  </select>
+  <select id="allsong" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from song_info
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from song_info
     where Song_ID = #{songId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.example.salieri.entity.Song" >
-    insert into song_info (Song_ID, Song_Name, Song_Pos, 
-      Song_Praise, Song_count)
-    values (#{songId,jdbcType=VARCHAR}, #{songName,jdbcType=VARCHAR}, #{songPos,jdbcType=VARCHAR}, 
-      #{songPraise,jdbcType=INTEGER}, #{songCount,jdbcType=INTEGER})
+    insert into song_info (Song_ID, Song_Name, Song_Pos,
+      Song_Praise, Song_count, Song_Singer,
+      Song_Pic, Song_intro)
+    values (#{songId,jdbcType=VARCHAR}, #{songName,jdbcType=VARCHAR}, #{songPos,jdbcType=VARCHAR},
+      #{songPraise,jdbcType=INTEGER}, #{songCount,jdbcType=INTEGER}, #{songSinger,jdbcType=VARCHAR},
+      #{songPic,jdbcType=VARCHAR}, #{songIntro,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.salieri.entity.Song" >
     insert into song_info
@@ -45,6 +70,15 @@
       <if test="songCount != null" >
         Song_count,
       </if>
+      <if test="songSinger != null" >
+        Song_Singer,
+      </if>
+      <if test="songPic != null" >
+        Song_Pic,
+      </if>
+      <if test="songIntro != null" >
+        Song_intro,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="songId != null" >
@@ -61,6 +95,15 @@
       </if>
       <if test="songCount != null" >
         #{songCount,jdbcType=INTEGER},
+      </if>
+      <if test="songSinger != null" >
+        #{songSinger,jdbcType=VARCHAR},
+      </if>
+      <if test="songPic != null" >
+        #{songPic,jdbcType=VARCHAR},
+      </if>
+      <if test="songIntro != null" >
+        #{songIntro,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -79,6 +122,15 @@
       <if test="songCount != null" >
         Song_count = #{songCount,jdbcType=INTEGER},
       </if>
+      <if test="songSinger != null" >
+        Song_Singer = #{songSinger,jdbcType=VARCHAR},
+      </if>
+      <if test="songPic != null" >
+        Song_Pic = #{songPic,jdbcType=VARCHAR},
+      </if>
+      <if test="songIntro != null" >
+        Song_intro = #{songIntro,jdbcType=VARCHAR},
+      </if>
     </set>
     where Song_ID = #{songId,jdbcType=VARCHAR}
   </update>
@@ -87,7 +139,10 @@
     set Song_Name = #{songName,jdbcType=VARCHAR},
       Song_Pos = #{songPos,jdbcType=VARCHAR},
       Song_Praise = #{songPraise,jdbcType=INTEGER},
-      Song_count = #{songCount,jdbcType=INTEGER}
+      Song_count = #{songCount,jdbcType=INTEGER},
+      Song_Singer = #{songSinger,jdbcType=VARCHAR},
+      Song_Pic = #{songPic,jdbcType=VARCHAR},
+      Song_intro = #{songIntro,jdbcType=VARCHAR}
     where Song_ID = #{songId,jdbcType=VARCHAR}
   </update>
 </mapper>

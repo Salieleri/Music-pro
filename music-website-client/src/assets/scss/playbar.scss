@@ -1,0 +1,127 @@
+.play-bar{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  transition: all 0.5s;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+}
+
+.item-up {
+  position: absolute;
+  bottom: 70px;
+  left: 20px;
+  cursor: pointer;
+}
+
+.kongjian {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  min-width: 1000px;
+  background-color: #fefefe;
+}
+
+.item {
+  position: relative;
+  width: 80px;
+  height: 50px;
+  line-height: 60px;
+  text-align: center;
+  cursor: pointer;
+}
+.icon.active {
+  color: red !important;
+}
+.volume {
+  position: absolute;
+  display: none;
+  height: 100px;
+  top: -110px;
+  right: 22px;
+}
+.show-volume {
+  display: block;
+}
+.item-img {
+  width: 60px;
+  height: 60px;
+  img {
+    width: 100%;
+  }
+}
+
+.playing-speed {
+  // 进度条
+  height: 50px;
+  width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.current-time,
+.left-time {
+  width: 70px;
+  text-align: center;
+  font-size: 13px;
+  color: #000000;
+  font-weight: 500;
+  top: -10px;
+}
+.progress-box {
+  flex: 1;
+}
+.item-song-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  height: 20px;
+  line-height: 10px;
+}
+.progress {
+  width: 100%;
+  background: #a9dbf9;
+  height: 6px;
+}
+.bg {
+  height: 100%;
+}
+.cur-progress {
+  height: 100%;
+  background: #30a4fc;
+}
+.idot {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  border-radius: 50%;
+  background-color: #000000;
+  top: -11px;
+  vertical-align: middle;
+}
+.turn {
+  transform: rotate(180deg);
+}
+
+.show {
+  bottom: -60px;
+}
+
+.icon {
+  width: 1.2em;
+  height: 1.2em;
+  font-size: 1.2em;
+  color: #000000;
+  fill: currentColor;
+  overflow: hidden;
+  position: relative;
+}

@@ -1,8 +1,12 @@
-.el-footer{
-  line-height: 20px;
-  text-align: center;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
+.thefooter{
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  p {
+    height: 30px;
+  }
 }

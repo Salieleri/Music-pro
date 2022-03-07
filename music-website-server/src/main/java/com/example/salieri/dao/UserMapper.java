@@ -1,6 +1,8 @@
 package com.example.salieri.dao;
 
 import com.example.salieri.entity.User;
+import com.example.salieri.entity.model.AvatorUploadModel;
+import com.example.salieri.entity.model.UserUpdateModel;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -16,10 +18,12 @@ public interface UserMapper {
 
     User selectByPrimaryKey(String userId);
 
-    int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(UserUpdateModel record);
 
     int updateByPrimaryKey(User record);
 
     int selectByUsernameAndPasswd(String userId,String Passwd);
+
+    int updateAvator(AvatorUploadModel model);
 
 }

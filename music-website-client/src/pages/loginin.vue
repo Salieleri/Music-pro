@@ -8,7 +8,7 @@
       <el-input placeholder="用户名" v-model="loginform.username"></el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input placeholder="密码" v-model="loginform.password"></el-input>
+      <el-input type="password" placeholder="密码" v-model="loginform.password" @keyup.enter.native="login"></el-input>
     </el-form-item>
     <div class="login-btn">
       <el-button>注册</el-button>
@@ -21,6 +21,7 @@
 <script>
 import {http} from '../api/index'
 import mixin from '../mixin/index'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'login',
@@ -67,18 +68,39 @@ export default {
           if (res.code === 1) {
             _this.notify('用户名或密码错误！', 'error')
           } else {
+            _this.notify('登陆成功', 'success')
             _this.$store.commit('setloginin', true)
-            console.log('123')
+            setTimeout(() => {
+              _this.$router.push('/')
+            }, 2000)
+            _this.setUserMsg(res.usermsg)
           }
         })
         .catch(err => {
           console.log(err)
         })
+    },
+    setUserMsg (item) {
+      this.$store.commit('setuserId', item.userId)
+      this.$store.commit('setavator', item.userAvator)
     }
+  },
+  computed: {
+    ...mapGetters([
+      'userid',
+      'avator'
+    ])
   }
 }
 </script>
 
 <style scoped>
 @import '../assets/scss/loginin.scss';
+</style>
+
+<style>
+.login-btn{
+  display: block;
+  width: 50%;
+}
 </style>

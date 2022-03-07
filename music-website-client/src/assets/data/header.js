@@ -20,18 +20,18 @@ const Loginmsg = [
   },
   {
     name: '注册',
-    path: '/register'
+    path: '/registry'
   }
 ]
 
 const Usermsg = [
   {
     name: '设置',
-    path: '/settings'
+    path: '/setting'
   },
   {
     name: '退出',
-    path: '/exit'
+    path: 0
   }
 ]
 

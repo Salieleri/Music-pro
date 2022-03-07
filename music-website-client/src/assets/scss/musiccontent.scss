@@ -1,0 +1,62 @@
+.icon{
+  width: 1.5em;
+  height: 1.5em;
+  font-size: 1.5em;
+  color: #30A4FC;
+  fill: currentColor;
+  overflow: hidden;
+  position: relative;
+  vertical-align: -0.3em;
+  right: 5px;
+}
+
+.is-play {
+  color: #30a4fc;
+  font-weight: bold;
+}
+
+.content {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  padding: 20px 40px;
+  min-width: 700px;
+}
+.title {
+  text-align: center;
+}
+ul {
+  width: 100%;
+  padding-bottom: 50px;
+}
+li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  text-indent: 20px;
+  cursor: pointer;
+}
+
+.song-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: auto;
+}
+.item-index {
+  width: 5%;
+}
+.item-title {
+  width: 30%;
+}
+.item-name {
+  width: 25%;
+}
+.item-intro {
+  width: 40%;
+}

@@ -2,6 +2,8 @@ package com.example.salieri.service.impl;
 
 import com.example.salieri.dao.UserMapper;
 import com.example.salieri.entity.User;
+import com.example.salieri.entity.model.AvatorUploadModel;
+import com.example.salieri.entity.model.UserUpdateModel;
 import com.example.salieri.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,15 +23,20 @@ public class UserServiceImpl implements UserService {
     }
 
     public int insertSelective(User record){
-        return 0;
+        return userMapper.insertSelective(record);
+    }
+
+    @Override
+    public int updateAvator(AvatorUploadModel model) {
+        return userMapper.updateAvator(model);
     }
 
     public User selectByPrimaryKey(String userId) {
         return userMapper.selectByPrimaryKey(userId);
     }
 
-    public int updateByPrimaryKeySelective(User record) {
-        return 0;
+    public int updateByPrimaryKeySelective(UserUpdateModel record) {
+        return userMapper.updateByPrimaryKeySelective(record);
     }
 
     public int updateByPrimaryKey(User record) {

@@ -9,6 +9,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   mvc:
     static-path-pattern: /**
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/comment
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.example.salieri.entity
+
+
+

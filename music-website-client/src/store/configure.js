@@ -3,8 +3,9 @@ import {BASE_URL} from '@/api/config'
 const configure = {
   state: {
     host: BASE_URL,
-    seachewords: '',
+    searchwords: '',
     activeName: '',
+    showAside: false,
     loginin: false,
     isactive: false,
     index: 0
@@ -35,9 +36,16 @@ const configure = {
     index: state => {
       let index = state.index
       if (!index) {
-        index = JSON.parse(window.sessionStorage.getItem('ubdex'))
+        index = JSON.parse(window.sessionStorage.getItem('index'))
       }
       return index
+    },
+    showAside: state => {
+      let showAside = state.showAside
+      if (!showAside) {
+        showAside = JSON.parse(window.sessionStorage.getItem('showAside'))
+      }
+      return showAside
     }
   },
   mutations: {
@@ -57,6 +65,10 @@ const configure = {
     setindex: (state, index) => {
       state.index = index
       window.sessionStorage.setItem('index', JSON.stringify(index))
+    },
+    setshowAside: (state, index) => {
+      state.showAside = index
+      window.sessionStorage.setItem('showAside', JSON.stringify(index))
     }
   },
   actions: {}

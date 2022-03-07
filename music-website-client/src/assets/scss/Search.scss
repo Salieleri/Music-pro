@@ -1,0 +1,28 @@
+.search{
+  margin: 0 auto auto;
+  padding-top: 70px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  width: 900px;
+  position: relative;
+}
+
+.searchList-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: 20px;
+  font-size: 1.5rem;
+  color: #000000;
+  span {
+    line-height: 50px;
+    cursor: pointer;
+  }
+}
+
+.isActive {
+  font-weight: 600;
+  border-bottom:5px solid #000000;
+}
