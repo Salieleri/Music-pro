@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.salieri.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.example.salieri.entity.User" >
+    <id column="User_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="User_Password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="User_Avator" property="userAvator" jdbcType="VARCHAR" />
+    <result column="User_Phonenumber" property="userPhonenumber" jdbcType="VARCHAR" />
+    <result column="User_Sex" property="userSex" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    User_ID, User_Password, User_Avator, User_Phonenumber, User_Sex
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where User_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUsernameAndPasswd" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where User_ID = #{userId,jdbcType=VARCHAR}
+    and User_Password = #{Passwd,jdbcType=VARCHAR}
+  </select>
+  <select id="getall" resultMap="BaseResultMap" parameterType="String">
+    select
+    <include refid="Base_Column_List"/>
+    from user_info
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_info
+    where User_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.salieri.entity.User" >
+    insert into user_info (User_ID, User_Password, User_Avator,
+      User_Phonenumber, User_Sex)
+    values (#{userId,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, #{userAvator,jdbcType=VARCHAR},
+      #{userPhonenumber,jdbcType=VARCHAR}, #{userSex})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.salieri.entity.User" >
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        User_ID,
+      </if>
+      <if test="userPassword != null" >
+        User_Password,
+      </if>
+      <if test="userAvator != null" >
+        User_Avator,
+      </if>
+      <if test="userPhonenumber != null" >
+        User_Phonenumber,
+      </if>
+      <if test="userSex != null">
+        User_Sex
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userAvator != null" >
+        #{userAvator,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhonenumber != null" >
+        #{userPhonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.salieri.entity.model.UserUpdateModel" >
+    update user_info
+    <set>
+      <if test="userPassword != null" >
+        User_Password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        User_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhonenumber != null" >
+        User_Phonenumber = #{userPhonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        User_Sex = #{userSex}
+      </if>
+    </set>
+    where User_ID = #{userIdBefore,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.salieri.entity.User" >
+    update user_info
+    set User_Password = #{userPassword,jdbcType=VARCHAR},
+      User_Avator = #{userAvator,jdbcType=VARCHAR},
+      User_Phonenumber = #{userPhonenumber,jdbcType=VARCHAR}
+    where User_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateAvator" parameterType="com.example.salieri.entity.model.AvatorUploadModel">
+    update user_info
+    <set>
+      <if test="userAvator != null">
+        User_Avator = #{userAvator,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where User_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

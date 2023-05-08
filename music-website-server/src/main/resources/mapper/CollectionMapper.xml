@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.salieri.dao.CollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.example.salieri.entity.CollectionKey" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <id column="User_ID" property="userId" jdbcType="VARCHAR" />
+    <id column="type" property="type" jdbcType="BIT" />
+  </resultMap>
+  <sql id="all_elem">
+    ID, User_ID, type
+  </sql>
+  <select id="getonecollect" resultMap="BaseResultMap">
+    select
+    <include refid="all_elem"/>
+    from collect_info
+    where ID = #{id} and User_ID = #{userid}
+  </select>
+  <select id="getcollectid" resultType="Integer">
+    select ID
+    from collect_info
+    where User_ID = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.example.salieri.entity.CollectionKey" >
+    delete from collect_info
+    where ID = #{id,jdbcType=VARCHAR}
+      and User_ID = #{userId,jdbcType=VARCHAR}
+      and type = #{type,jdbcType=BIT}
+  </delete>
+  <insert id="insert" parameterType="com.example.salieri.entity.CollectionKey" >
+    insert into collect_info (ID, User_ID, type)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{type,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.salieri.entity.CollectionKey" >
+    insert into collect_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        User_ID,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <delete id="delcollection" parameterType="com.example.salieri.entity.model.DeleteCollectModel">
+    delete from collect_info
+    where ID = #{id} and User_ID = #{userid}
+  </delete>
+</mapper>
