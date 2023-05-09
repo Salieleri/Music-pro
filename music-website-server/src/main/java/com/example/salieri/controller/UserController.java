@@ -6,6 +6,8 @@ import com.example.salieri.entity.model.AvatorUploadModel;
 import com.example.salieri.entity.model.UserUpdateModel;
 import com.example.salieri.service.impl.RedisService;
 import com.example.salieri.service.impl.UserServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +30,8 @@ public class UserController {
 
     @Autowired
     private RedisService redisService;
+
+    private static Logger log = LoggerFactory.getLogger(UserController.class);
 
     @ResponseBody
     @GetMapping("/user")
@@ -64,6 +68,7 @@ public class UserController {
             json.put("usermsg", res);
             session.setAttribute("username",username);
         }
+        log.info("用户" + username + "登录成功");
         return json;
     }
 
