@@ -8,7 +8,7 @@ server:
   ssl:
     enabled: true
     key-store: classpath:salieri.love.jks
-    key-store-password: 141315?a
+    key-store-password: x9lw8uis4x
 
 spring:
   servlet:
