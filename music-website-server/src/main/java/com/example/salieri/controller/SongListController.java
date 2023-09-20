@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static com.example.salieri.constant.constant.RESOURCE_PATH_MAC;
 import static com.example.salieri.constant.constant.RESOURCE_PATH_WIN;
 
 @Controller
@@ -124,6 +125,8 @@ public class SongListController {
         File Img = null;
         if(System.getProperty("os.name").toLowerCase().startsWith("win")){
             Img = new File(RESOURCE_PATH_WIN + img);
+        } else {
+            Img = new File(RESOURCE_PATH_MAC + img);
         }
 
         if(Img.exists()){
@@ -192,6 +195,9 @@ public class SongListController {
         if(System.getProperty("os.name").toLowerCase().startsWith("win")){
             filePath = RESOURCE_PATH_WIN + "\\img\\SongList\\";
             fileofpast = new File(RESOURCE_PATH_WIN + System.getProperty("file.separator") + past);
+        } else {
+            filePath = RESOURCE_PATH_MAC + "/img/SongList/";
+            fileofpast = new File(RESOURCE_PATH_MAC + System.getProperty("file.separator") + past);
         }
         File dest = new File(filePath + System.getProperty("file.separator") + fileName);
         if(fileofpast.exists()){

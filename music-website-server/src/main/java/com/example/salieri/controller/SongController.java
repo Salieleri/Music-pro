@@ -15,12 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import static com.example.salieri.constant.constant.RESOURCE_PATH_MAC;
 import static com.example.salieri.constant.constant.RESOURCE_PATH_WIN;
 
 @RestController
@@ -85,6 +88,9 @@ public class SongController {
         if(System.getProperty("os.name").toLowerCase().startsWith("win")){
             filePath = RESOURCE_PATH_WIN + "\\img\\SongPic\\";
             fileofpast = new File(RESOURCE_PATH_WIN + System.getProperty("file.separator") + past);
+        } else {
+            filePath = RESOURCE_PATH_MAC + "/img/SongPic/";
+            fileofpast = new File(RESOURCE_PATH_MAC + System.getProperty("file.separator") + past);
         }
         File dest = new File(filePath + System.getProperty("file.separator") + fileName);
 
@@ -140,6 +146,9 @@ public class SongController {
         if(System.getProperty("os.name").toLowerCase().startsWith("win")){
             filePath = RESOURCE_PATH_WIN + "\\Song\\";
             fileofpast = new File(RESOURCE_PATH_WIN + System.getProperty("file.separator") + past);
+        } else {
+            filePath = RESOURCE_PATH_MAC + "/Song/";
+            fileofpast = new File(RESOURCE_PATH_MAC + System.getProperty("file.separator") + past);
         }
         File dest = new File(filePath + System.getProperty("file.separator") + fileName);
 
@@ -245,6 +254,9 @@ public class SongController {
         if(System.getProperty("os.name").toLowerCase().startsWith("win")){
             Img = new File(RESOURCE_PATH_WIN + img);
             Url = new File(RESOURCE_PATH_WIN + url);
+        } else {
+            Img = new File(RESOURCE_PATH_MAC + img);
+            Url = new File(RESOURCE_PATH_MAC + url);
         }
 
         if(Img.exists()){
@@ -284,7 +296,11 @@ public class SongController {
         InputStream in = null;
         ServletOutputStream out = null;
         byte[] buff = new byte[1024];
-        in = new FileInputStream(RESOURCE_PATH_WIN + filepath);
+        if(System.getProperty("os.name").toLowerCase().startsWith("win")){
+            in = Files.newInputStream(Paths.get(RESOURCE_PATH_WIN + filepath));
+        } else {
+            in = Files.newInputStream(Paths.get(RESOURCE_PATH_MAC + filepath));
+        }
         out = response.getOutputStream();
         int aRead = 0;
         int kilobyte = 0;
