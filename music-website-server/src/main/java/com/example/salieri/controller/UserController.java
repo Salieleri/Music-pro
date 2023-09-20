@@ -81,13 +81,13 @@ public class UserController {
         String username = (String) req.get("username");
         String password = (String) req.get("password");
         String phonenumber = (String) req.get("phonenum");
-        String sex = (String) req.get("sex");
+//        String sex = (String) req.get("sex");
 
         User newuser = new User();
         newuser.setUserId(username);
         newuser.setUserPassword(password);
         newuser.setUserPhonenumber(phonenumber);
-        newuser.setUserSex(sex);
+//        newuser.setUserSex(sex);
 
         User conf = (User) redisService.get("user", username);
         if(conf != null){
